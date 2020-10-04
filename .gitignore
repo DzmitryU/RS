@@ -104,4 +104,4 @@ dist
 .tern-port
 /.idea/
 /caesar-cipher-cli/output.txt
-/caesar-cipher-cli/input.txt.txt
+/caesar-cipher-cli/input.txt
