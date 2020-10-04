@@ -1,4 +1,4 @@
-**CLI tool that encodes and decode a text by [Caesar cipher](https://en.wikipedia.org/wiki/Caesar_cipher)**.
+**CLI tool that encodes and decodes a text by [Caesar cipher](https://en.wikipedia.org/wiki/Caesar_cipher)**.
 
 CLI tool accept 4 options (short alias and full name):
 

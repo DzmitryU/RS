@@ -2,7 +2,7 @@
   "name": "caesar-cipher-cli",
   "version": "1.0.0",
   "description": "CLI tool that encodes and decode a text by Caesar cipher",
-  "main": "index.js",
+  "main": "my_caesar_cli.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
