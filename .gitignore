@@ -103,3 +103,5 @@ dist
 # TernJS port file
 .tern-port
 /.idea/
+/caesar-cipher-cli/output.txt
+/caesar-cipher-cli/input.txt.txt
