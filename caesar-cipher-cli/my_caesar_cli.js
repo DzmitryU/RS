@@ -7,13 +7,6 @@ const { CaesarScrambler } = require('./scrambler');
 const { ACTIONS } = require('./constants');
 const { validateArgs } = require('./validator');
 
-/**
- .requiredOption('-s, --shift <n>', 'shift')
- .requiredOption('-i, --input <s>', 'an input file path')
- .requiredOption('-o, --output <s>', 'an output file path')
- .requiredOption('-a, --action <s>', 'an action encode/decode')
- */
-
 program
     .storeOptionsAsProperties(true)
     .passCommandToAction(false);
