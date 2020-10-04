@@ -29,10 +29,10 @@ program
             process.exit(9);
         }
         const { shift, input, output, action } = args;
-        const inputFile = fs.createReadStream(input);
+        const source = input ? fs.createReadStream(input) : process.stdin;
         const target = output ? fs.createWriteStream(output, { flags: 'a' }) : process.stdout;
         await promisify(pipeline)(
-            inputFile,
+            source,
             new CaesarScrambler(action === ACTIONS.ENCODE ? shift : -shift),
             target,
         );
