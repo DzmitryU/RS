@@ -25,7 +25,7 @@ program
     .option('-a, --action <action>', 'an action encode/decode')
     .action(async ({ shift, input, output, action }) => {
         const inputFile = fs.createReadStream(input);
-        const outputFile = fs.createWriteStream(output);
+        const outputFile = fs.createWriteStream(output, { flags: 'a' });
         await promisify(pipeline)(
             inputFile,
             new CaesarScrambler(action === ACTIONS.ENCODE ? shift : -shift),
