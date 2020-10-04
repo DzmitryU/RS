@@ -1,7 +1,7 @@
 const stream = require('stream');
 const { StringDecoder } = require('string_decoder');
 
-const { alphabets } = require('./constants');
+const { ALPHABETS } = require('./constants');
 
 class CaesarScrambler extends stream.Transform {
     constructor(shift) {
@@ -30,7 +30,7 @@ class CaesarScrambler extends stream.Transform {
     }
 
     _getAlphabet(char) {
-        return alphabets.find((lettersSet) => lettersSet.includes(char));
+        return ALPHABETS.find((lettersSet) => lettersSet.includes(char));
     }
 
     _getEncryptedIndex(index, length) {

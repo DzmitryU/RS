@@ -1,7 +1,10 @@
 const program = require('commander');
 const fs = require('fs');
+const { pipeline } = require('stream');
+const { promisify } = require('util');
 
 const { CaesarScrambler } = require('./scrambler');
+const { ACTIONS } = require('./constants');
 
 /**
  .requiredOption('-s, --shift <n>', 'shift')
@@ -23,7 +26,11 @@ program
     .action(async ({ shift, input, output, action }) => {
         const inputFile = fs.createReadStream(input);
         const outputFile = fs.createWriteStream(output);
-        inputFile.pipe(new CaesarScrambler(shift)).pipe(outputFile);
+        await promisify(pipeline)(
+            inputFile,
+            new CaesarScrambler(action === ACTIONS.ENCODE ? shift : -shift),
+            outputFile,
+        );
     });
 
 program.parse(process.argv);
