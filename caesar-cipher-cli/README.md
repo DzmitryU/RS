@@ -1,5 +1,10 @@
 **CLI tool that encodes and decodes a text by [Caesar cipher](https://en.wikipedia.org/wiki/Caesar_cipher)**.
 
+**Initialization:**
+
+1. `cd caesar-cipher-cli`
+2. run `npm i`
+
 CLI tool accept 4 options (short alias and full name):
 
 1.  **-s, --shift**: a shift
