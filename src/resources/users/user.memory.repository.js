@@ -1,6 +1,26 @@
+const db = {};
+
 const getAll = async () => {
-  // TODO: mock implementation. should be replaced during task development
-  return [];
+  return Object.values(db);
 };
 
-module.exports = { getAll };
+const get = async (id) => {
+  return db[id];
+}
+
+const remove = async (id) => {
+  delete db[id];
+}
+
+const save = async (user) => {
+  db[user.id] = user;
+
+  return user
+};
+
+module.exports = {
+  getAll,
+  get,
+  remove,
+  save,
+};
