@@ -11,7 +11,11 @@ router.route('/').get(async (req, res) => {
 
 router.route('/:id').get(async (req, res) => {
   const user = await usersService.get(req.params.id);
-  res.json(User.toResponse(user));
+  if (user) {
+    res.json(User.toResponse(user));
+  } else {
+    res.status(HttpStatus.NOT_FOUND).send();
+  }
 });
 
 router.route('/').post(async (req, res) => {
