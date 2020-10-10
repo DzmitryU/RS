@@ -9,6 +9,11 @@ const get = (boardId, id) => tasksRepo.get(boardId, id);
 
 const remove = (boardId, id) => tasksRepo.remove(boardId, id);
 
+const removeByBoard = async (boardId) => {
+    const tasks = await getAll(boardId);
+    tasks.forEach((task) => remove(boardId, task.id));
+}
+
 const update = (task) => tasksRepo.save(task);
 
 module.exports = {
@@ -16,5 +21,6 @@ module.exports = {
     getAll,
     get,
     remove,
+    removeByBoard,
     update,
 };
