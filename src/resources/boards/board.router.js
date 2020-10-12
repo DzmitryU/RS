@@ -1,8 +1,10 @@
 const router = require('express').Router();
 const HttpStatus = require('http-status-codes');
 
-const Board = require('./models/board.model');
 const boardsService = require('./board.service');
+const taskRouter = require('../tasks/task.router')
+
+router.use('/:boardId/tasks', taskRouter);
 
 router.route('/').get(async (req, res) => {
   const boards = await boardsService.getAll();
