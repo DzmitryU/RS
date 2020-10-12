@@ -1,14 +1,14 @@
-const router = require('express').Router();
+const router = require('express').Router({mergeParams: true});
 const HttpStatus = require('http-status-codes');
 
 const tasksService = require('./task.service');
 
-router.route('/:boardId/tasks').get(async (req, res) => {
+router.route('/').get(async (req, res) => {
   const tasks = await tasksService.getAll(req.params.boardId);
   res.status(HttpStatus.OK).json(tasks);
 });
 
-router.route('/:boardId/tasks/:id').get(async (req, res) => {
+router.route('/:id').get(async (req, res) => {
   const task = await tasksService.get(req.params.boardId, req.params.id);
   if (task) {
     res.status(HttpStatus.OK).json(task);
@@ -17,18 +17,18 @@ router.route('/:boardId/tasks/:id').get(async (req, res) => {
   }
 });
 
-router.route('/:boardId/tasks').post(async (req, res) => {
+router.route('').post(async (req, res) => {
   const task = await tasksService.create({ ...req.body, boardId: req.params.boardId });
 
   res.status(HttpStatus.OK).json(task);
 });
 
-router.route('/:boardId/tasks/:id').put(async (req, res) => {
+router.route('/:id').put(async (req, res) => {
   const task = await tasksService.update({ ...req.body, boardId: req.params.boardId });
   res.status(HttpStatus.OK).json(task);
 });
 
-router.route('/:boardId/tasks/:id').delete(async (req, res) => {
+router.route('/:id').delete(async (req, res) => {
   await tasksService.remove(req.params.boardId, req.params.id);
   res.status(HttpStatus.OK).send();
 });
