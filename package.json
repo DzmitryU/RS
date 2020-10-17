@@ -52,6 +52,7 @@
     "lodash": "^4.17.20",
     "swagger-ui-express": "4.1.2",
     "uuid": "3.3.3",
+    "winston": "^3.3.3",
     "yamljs": "0.3.0"
   },
   "devDependencies": {
