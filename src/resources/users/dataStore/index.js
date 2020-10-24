@@ -1,7 +1,10 @@
-const repository = require('./memory/user.memory.repository');
-const User = require('./memory/user.model');
+const memoryRepository = require('./memory/user.memory.repository');
+const memoryUser = require('./memory/user.memory.model');
+
+const mongoRepository = require('./mongo/user.mongo.repository');
+const mongoUser = require('./mongo/user.model');
 
 module.exports = {
-    repository,
-    User,
+    repository: mongoRepository,
+    User: mongoUser,
 }

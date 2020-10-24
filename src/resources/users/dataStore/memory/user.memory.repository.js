@@ -1,3 +1,5 @@
+const User = require('./user.memory.model');
+
 const db = {};
 
 const getAll = async () => {
@@ -18,9 +20,12 @@ const save = async (user) => {
   return user
 };
 
+const create = (user) => save(new User(user));
+
 module.exports = {
   getAll,
   get,
   remove,
   save,
+  create,
 };

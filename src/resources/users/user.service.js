@@ -1,8 +1,8 @@
 const { repository: usersRepo} = require('./dataStore');
-const User = require('./dataStore/memory/user.model');
+const { User } = require('./dataStore');
 const taskService = require('../tasks/task.service');
 
-const create = (createUserDto) => usersRepo.save(new User(createUserDto));
+const create = (createUserDto) => usersRepo.create(createUserDto);
 
 const getAll = () => usersRepo.getAll();
 
