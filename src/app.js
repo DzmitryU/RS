@@ -2,9 +2,9 @@ const express = require('express');
 const swaggerUI = require('swagger-ui-express');
 const path = require('path');
 const YAML = require('yamljs');
-const HttpStatus = require('http-status-codes');
 
 const { monitorRequests, logger } = require('./common/logger');
+const { errorHandler } = require('./common/errorHandler');
 
 const userRouter = require('./resources/users/user.router');
 const boardRouter = require('./resources/boards/board.router');
@@ -31,10 +31,10 @@ app.use('/users', userRouter);
 app.use('/boards', boardRouter);
 app.use('/boards', taskRouter);
 
-app.use((err, req, res, next) => {
-  logger.error(`Unhandled server error ${err.message}`);
+app.use(errorHandler);
 
-  res.status(HttpStatus.INTERNAL_SERVER_ERROR).send('Unhandled server error');
-});
+// throw Error('Oops!');
+// Promise.reject(Error('Oops!'));
+
 
 module.exports = app;
