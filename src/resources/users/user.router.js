@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const HttpStatus = require('http-status-codes');
 
-const User = require('./user.model');
+const { User } = require('./dataStore');
 const usersService = require('./user.service');
 const { errorCatcher } = require('../../common/errorCatcher');
 
