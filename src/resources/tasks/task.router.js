@@ -2,17 +2,18 @@ const router = require('express').Router({mergeParams: true});
 const HttpStatus = require('http-status-codes');
 
 const tasksService = require('./task.service');
+const { Task } = require('./dataStore');
 const { errorCatcher } = require('../../common/errorCatcher');
 
 router.route('/').get(errorCatcher(async (req, res) => {
   const tasks = await tasksService.getAll(req.params.boardId);
-  res.status(HttpStatus.OK).json(tasks);
+  res.status(HttpStatus.OK).json(tasks.map(Task.toResponse));
 }));
 
 router.route('/:id').get(errorCatcher(async (req, res) => {
   const task = await tasksService.get(req.params.boardId, req.params.id);
   if (task) {
-    res.status(HttpStatus.OK).json(task);
+    res.status(HttpStatus.OK).json(Task.toResponse(task));
   } else {
     res.status(HttpStatus.NOT_FOUND).send();
   }
@@ -21,7 +22,7 @@ router.route('/:id').get(errorCatcher(async (req, res) => {
 router.route('').post(errorCatcher(async (req, res) => {
   const task = await tasksService.create({ ...req.body, boardId: req.params.boardId });
 
-  res.status(HttpStatus.OK).json(task);
+  res.status(HttpStatus.OK).json(Task.toResponse(task));
 }));
 
 router.route('/:id').put(errorCatcher(async (req, res) => {

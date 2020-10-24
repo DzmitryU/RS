@@ -13,8 +13,10 @@ const userSchema = {
 
 const User = mongoose.model('User', userSchema);
 
-User.toResponse = (userEntity) => ({
-   name: userEntity.name, login: userEntity.login, id: userEntity._id,
+User.toResponse = ({ name, login, _id }) => ({
+   name,
+    login,
+    id: _id,
 });
 
 module.exports = User;
