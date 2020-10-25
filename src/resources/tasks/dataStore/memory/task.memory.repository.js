@@ -1,4 +1,5 @@
 const { flattenDeep } = require('lodash');
+const Task = require('./task.memory.model');
 
 const db = {};
 
@@ -30,10 +31,13 @@ const save = async (task) => {
   return task
 };
 
+const create = (task) => save(new Task(task));
+
 module.exports = {
   getAll,
   get,
   getByKey,
   remove,
   save,
+  create,
 };

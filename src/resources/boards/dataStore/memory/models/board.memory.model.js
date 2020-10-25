@@ -1,6 +1,6 @@
 const uuid = require('uuid');
 
-const Column = require('./column.model');
+const Column = require('./column.memory.model');
 
 class Board {
   constructor({

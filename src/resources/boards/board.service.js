@@ -1,19 +1,18 @@
-const boardsRepo = require('./board.memory.repository');
-const Board = require('./models/board.model');
+const { repository, Board } = require('./dataStore');
 const taskService = require('../tasks/task.service')
 
-const create = (createBoardDto) => boardsRepo.save(new Board(createBoardDto));
+const create = async (createBoardDto) => repository.create(createBoardDto);
 
-const getAll = () => boardsRepo.getAll();
+const getAll = async () => repository.getAll();
 
-const get = (id) => boardsRepo.get(id);
+const get = async (id) => repository.get(id);
 
 const remove = async (id) => {
-    await boardsRepo.remove(id);
+    await repository.remove(id);
     await taskService.removeByBoard(id);
 }
 
-const update = (user) => boardsRepo.save(user);
+const update = async (user) => repository.save(user);
 
 module.exports = {
     create,
