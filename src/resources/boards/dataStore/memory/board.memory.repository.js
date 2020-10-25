@@ -1,3 +1,5 @@
+const Board = require('./models/board.memory.model');
+
 const db = {};
 
 const getAll = async () => {
@@ -18,9 +20,12 @@ const save = async (board) => {
   return board
 };
 
+const create = async (board) => save(new Board(board));
+
 module.exports = {
   getAll,
   get,
   remove,
   save,
+  create,
 };

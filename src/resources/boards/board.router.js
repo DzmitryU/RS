@@ -3,19 +3,20 @@ const HttpStatus = require('http-status-codes');
 
 const boardsService = require('./board.service');
 const taskRouter = require('../tasks/task.router')
+const { Board } = require('./dataStore')
 const { errorCatcher } = require('../../common/errorCatcher');
 
 router.use('/:boardId/tasks', taskRouter);
 
 router.route('/').get(errorCatcher(async (req, res) => {
   const boards = await boardsService.getAll();
-  res.json(boards);
+  res.json(boards.map(Board.toResponse));
 }));
 
 router.route('/:id').get(errorCatcher(async (req, res) => {
   const board = await boardsService.get(req.params.id);
   if (board) {
-    res.json(board);
+    res.json(Board.toResponse(board));
   } else {
     res.status(HttpStatus.NOT_FOUND).send();
   }
@@ -24,7 +25,7 @@ router.route('/:id').get(errorCatcher(async (req, res) => {
 router.route('/').post(errorCatcher(async (req, res) => {
   const board = await boardsService.create(req.body);
 
-  res.status(HttpStatus.OK).json(board);
+  res.status(HttpStatus.OK).json(Board.toResponse(board));
 }));
 
 router.route('/:id').put(errorCatcher(async (req, res) => {
