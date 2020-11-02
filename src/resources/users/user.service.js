@@ -13,6 +13,8 @@ const getAll = () => repository.getAll();
 
 const get = (id) => repository.get(id);
 
+const getByKey = (key, value) => repository.getByKey(key, value);
+
 const remove = async (id) => {
     await taskService.resetUser(id);
     await repository.remove(id);
@@ -20,10 +22,16 @@ const remove = async (id) => {
 
 const update = (user) => repository.save(user);
 
+const verify = async (user, password) => {
+    return await bcrypt.compare(password, user.password);
+}
+
 module.exports = {
     create,
     getAll,
     get,
     remove,
     update,
+    getByKey,
+    verify,
 };
