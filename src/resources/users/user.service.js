@@ -1,7 +1,13 @@
+const bcrypt = require('bcrypt');
+
 const { repository } = require('./dataStore');
 const taskService = require('../tasks/task.service');
+const { SALT_ROUNDS } = require('../../common/constants');
 
-const create = (createUserDto) => repository.create(createUserDto);
+const create = async (createUserDto) => {
+    const hash = await bcrypt.hash(createUserDto.password, SALT_ROUNDS);
+    return repository.create({...createUserDto, password: hash });
+}
 
 const getAll = () => repository.getAll();
 
