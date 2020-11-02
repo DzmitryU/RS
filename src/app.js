@@ -3,7 +3,6 @@ const swaggerUI = require('swagger-ui-express');
 const path = require('path');
 const YAML = require('yamljs');
 const mongoose = require('mongoose');
-const passport = require('passport');
 
 const {monitorRequests, logger} = require('./common/logger');
 const {errorHandler} = require('./common/errorHandler');
