@@ -4,6 +4,8 @@ const getAll = async () => User.find({});
 
 const get = async (id) => User.findById(id);
 
+const getByKey = async (key, value) => User.find({ [key]: value });
+
 const remove = async (id) => User.deleteOne({ _id: id });
 
 const save = async (user) => {
@@ -20,4 +22,5 @@ module.exports = {
   remove,
   save,
   create,
+  getByKey,
 };

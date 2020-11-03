@@ -4,9 +4,10 @@ const path = require('path');
 const YAML = require('yamljs');
 const mongoose = require('mongoose');
 
-const { monitorRequests, logger } = require('./common/logger');
-const { errorHandler } = require('./common/errorHandler');
-const { MONGO_CONNECTION_STRING } = require('./common/config')
+const {monitorRequests, logger} = require('./common/logger');
+const {errorHandler} = require('./common/errorHandler');
+const {MONGO_CONNECTION_STRING} = require('./common/config');
+const {configureAuth} = require('./common/auth');
 
 const userRouter = require('./resources/users/user.router');
 const boardRouter = require('./resources/boards/board.router');
@@ -24,12 +25,14 @@ app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use(monitorRequests);
 
 app.use('/', (req, res, next) => {
-  if (req.originalUrl === '/') {
-    res.send('Service is running!');
-    return;
-  }
-  next();
+    if (req.originalUrl === '/') {
+        res.send('Service is running!');
+        return;
+    }
+    next();
 });
+
+configureAuth(app);
 
 app.use('/users', userRouter);
 app.use('/boards', boardRouter);
