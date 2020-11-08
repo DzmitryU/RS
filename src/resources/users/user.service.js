@@ -20,7 +20,12 @@ const remove = async (id) => {
     await repository.remove(id);
 }
 
-const update = (user) => repository.save(user);
+const update = async (user) => {
+    if (user.password) {
+        user.password =  await bcrypt.hash(user.password, SALT_ROUNDS);
+    }
+    return repository.save(user);
+}
 
 const verify = async (user, password) => {
     return await bcrypt.compare(password, user.password);

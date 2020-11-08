@@ -42,7 +42,7 @@ const configureLogin = (app) => {
             if (user) {
                 res.json({token: jwt.sign({id: user.id, login: user.login}, JWT_SECRET_KEY)});
             } else {
-                res.status(HttpStatus.UNAUTHORIZED).send();
+                res.status(HttpStatus.FORBIDDEN).send();
             }
         })(req, res, next);
     });
